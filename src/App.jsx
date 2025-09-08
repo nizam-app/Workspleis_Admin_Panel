@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Outlet } from "react-router"
+import Aside from "./components/Aside";
 // import Menu from "./components/additions/Menu";
 
 
@@ -7,21 +8,18 @@ function App() {
 const [open, setOpen] = useState(false);
 
   return (
-    <div className="flex h-screen  bg-yellow-700">
+    <div className="flex h-screen">
       {/* Sidebar (hidden on mobile, shown on md+) */}
-      <aside className="hidden md:flex flex-col bg-green-700 w-64 p-4">
+      <aside className="hidden md:flex flex-col ">
         <h2 className="text-white font-bold">Sidebar</h2>
-        <nav className="mt-4 space-y-2">
-          <a href="#" className="block text-white">Dashboard</a>
-          <a href="#" className="block text-white">Settings</a>
-          <a href="#" className="block text-white">Profile</a>
-        </nav>
+         <Aside />
       </aside>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col">
         {/* Fixed Navbar */}
-        <header className="sticky top-0 left-0 md:left-64 right-0  flex items-center justify-between bg-red-700 p-4">
+        <header className="sticky top-0 left-0 md:left-64 right-0  flex items-center 
+        justify-between bg-red-700 p-4">
           <h1 className="text-white font-bold">My App</h1>
 
           {/* Mobile menu button */}
@@ -43,12 +41,8 @@ const [open, setOpen] = useState(false);
         )}
 
         {/* Scrollable Page Content */}
-        <section className="flex-1 overflow-y-auto scrollbar-none no-scrollbar bg-blue-700 p-10 pt-20">
-          <h2 className="text-white">Main Content Area</h2>
-          <p className="text-white mt-4">
-            Scrollable content... (add more content here to test scrolling)
-          </p>
-          <div className="h-[2000px]" /> {/* demo scroll height */}
+        <section className="flex-1 overflow-y-auto scrollbar-none no-scrollbar  p-10 ">
+           <Outlet /> 
         </section>
       </main>
     </div>
