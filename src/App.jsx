@@ -41,7 +41,7 @@ const [open, setOpen] = useState(false);
         )}
 
         {/* Scrollable Page Content */}
-        <section className="flex-1 overflow-y-auto scrollbar-none no-scrollbar  p-10 ">
+        <section className="flex-1 overflow-y-auto scrollbar-none no-scrollbar p-10">
            <Outlet /> 
         </section>
       </main>
