@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Outlet } from "react-router"
 import Aside from "./components/Aside"; 
 
+import logo from './assets/aside/logo.png'
+
 
 function App() { 
 const [open, setOpen] = useState(false);
@@ -9,8 +11,8 @@ const [open, setOpen] = useState(false);
   return (
     <div className="flex h-screen">
       {/* Sidebar (hidden on mobile, shown on md+) */}
-      <aside className="hidden md:flex flex-col ">
-        <h2 className="text-white font-bold">Sidebar</h2>
+      <aside className="hidden md:flex flex-col h-[100vh] border-r border-black/30">
+      <div className="p-6 border-b border-black/30"><img src={logo} alt="logo" /></div>
          <Aside />
       </aside>
 

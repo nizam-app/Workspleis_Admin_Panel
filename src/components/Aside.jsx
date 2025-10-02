@@ -1,92 +1,84 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router';
+ import dashboard1 from '../assets/aside/dashboard1.png'
+ import dashboard2 from '../assets/aside/dashboard2.png'
+ import userrequest1 from '../assets/aside/userrequest1.png'
+ import userrequest2 from '../assets/aside/userrequest2.png'
+ import job1 from '../assets/aside/job1.png'
+ import job2 from '../assets/aside/job2.png'
+ import special1 from '../assets/aside/special1.png'
+ import special2 from '../assets/aside/special2.png'
+ import conversation1 from '../assets/aside/conversation1.png'
+ import conversation2 from '../assets/aside/conversation2.png'
+ import proposal1 from '../assets/aside/proposal1.png'
+ import proposal2 from '../assets/aside/proposal2.png'
+ import usermanagement1 from '../assets/aside/usermanagement1.png'
+ import usermanagement2 from '../assets/aside/usermanagement2.png'
 
 const Aside = () => {
+
     const menuItems = [
-    { name: "Overview", icon: <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
-  className="lucide lucide-chart-column w-6 h-6"
-  aria-hidden="true"
->
-  <path d="M3 3v16a2 2 0 0 0 2 2h16" />
-  <path d="M18 17V9" />
-  <path d="M13 17V5" />
-  <path d="M8 17v-3" />
-</svg>, path: "/" },
-    { name: "User Management", icon: <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
-  className="lucide lucide-users w-6 h-6"
-  aria-hidden="true"
->
-  <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-  <path d="M16 3.128a4 4 0 0 1 0 7.744" />
-  <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-  <circle cx="9" cy="7" r="4" />
-</svg>, path: "/user-management" },
-    { name: "Task Management", icon: <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
-  className="lucide lucide-briefcase w-6 h-6"
-  aria-hidden="true"
->
-  <path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-  <rect width="20" height="14" x="2" y="6" rx="2" />
-</svg>, path: "/task-management" },
-    { name: "Special Projects", icon:  <svg
-  xmlns="http://www.w3.org/2000/svg"
-  width="24"
-  height="24"
-  viewBox="0 0 24 24"
-  fill="none"
-  stroke="currentColor"
-  strokeWidth="2"
-  strokeLinecap="round"
-  strokeLinejoin="round"
-  className="lucide lucide-star w-6 h-6"
-  aria-hidden="true"
->
-  <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
-</svg>, path: "/special/project-management" }
-  ];
+      {
+      name : "Dashboard", 
+      icon1  : dashboard1, 
+      icon2 : dashboard2,
+      path : '/'
+    },
+      {
+      name : "User Requests", 
+      icon1  : userrequest1, 
+      icon2 : userrequest2,
+       path : '/user-request'
+    },
+      {
+      name : "Jobs Management", 
+      icon1  : job1, 
+      icon2 : job2,
+      path : '/job-management'
+    },
+      {
+      name : "Special Projects", 
+      icon1  : special1, 
+      icon2 : special2,
+      path : "/special-projects"
+    },
+      {
+      name : "Conversations", 
+      icon1  : conversation1, 
+      icon2 : conversation2,
+      path : '/conversations'
+    },
+      {
+      name : "Proposals", 
+      icon1  : proposal1, 
+      icon2 : proposal2,
+      path : '/proposals'
+    },
+      {
+      name : "User Management", 
+      icon1  : usermanagement1, 
+      icon2 : usermanagement2,
+      path : '/user-management'
+    },
+  ]
+
+  const [active, setActive] = useState("Dashboard")
+
   return (
-   <nav className="p-6 space-y-2">
+   <nav className="py-6 px-2 space-y-2">
       {menuItems.map((item) => (
         <NavLink
           key={item.name}
           to={item.path}
-          className={({ isActive }) =>
-            `w-full flex items-center space-x-4 px-5 py-4 rounded-xl transition-all duration-200 ${
-              isActive
-                ? "bg-[#d2ff57] text-primary-foreground shadow-lg "
-                : "text-foreground hover:bg-muted hover:translate-x-1"
-            }`
-          }
+          onClick={() => setActive(item.name)}
+          className=
+            {`w-full text-xl flex items-center space-x-4 px-5 py-4`}
         >
-          {item.icon}
-          <span className="font-medium text-lg">{item.name}</span>
+          <img src={item.name === active ? item.icon2 : item.icon1 } alt="icon"
+          
+          className='w-[30px] h-[30px]'/>
+          <span className={`
+            ${item.name === active && 'font-bold lilac'} `}>{item.name}</span>
         </NavLink>
       ))}
     </nav>

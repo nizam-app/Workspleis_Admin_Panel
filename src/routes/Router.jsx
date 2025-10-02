@@ -2,8 +2,11 @@ import { createBrowserRouter } from "react-router";
 import App from "../App";
 import overview from "../pages/overview";
 import UserManagement from "../pages/UserManagement";
-import taskManagement from "../pages/taskManagement";
-import SpecialTaskManagement from "../pages/SpecialTaskManagement";
+import UserRequest from "../pages/UserRequest";
+import JobManagement from "../pages/JobManagement";
+import SpecialProject from "../pages/SpecialProject";
+import Conversation from "../pages/Conversation";
+import Proposals from "../pages/Proposals";
  
 
 
@@ -18,17 +21,30 @@ const Router = createBrowserRouter([
                Component : overview ,
             },
             { 
+               path : 'user-request',
+               Component : UserRequest ,
+            },
+            { 
+               path : 'job-management',
+               Component : JobManagement,
+            },
+            { 
+               path : 'special-projects',
+               Component : SpecialProject,
+            },
+            { 
+               path : 'conversations',
+               Component : Conversation,
+            },
+            { 
+               path : 'proposals',
+               Component : Proposals,
+            },
+            { 
                path : 'user-management',
-               Component : UserManagement ,
+               Component : UserManagement,
             },
-            { 
-               path : 'task-management',
-               Component : taskManagement,
-            },
-            { 
-               path : 'special/project-management',
-               Component : SpecialTaskManagement,
-            },
+            
             // { 
             //    path : 'track-order',
             //    Component : TrackOrder,
