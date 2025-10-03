@@ -18,7 +18,7 @@ const Router = createBrowserRouter([
         children :[
             { 
                index : true,
-               Component : overview ,
+               Component : overview ,  
             },
             { 
                path : 'user-request',
