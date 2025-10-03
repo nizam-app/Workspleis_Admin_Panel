@@ -253,6 +253,7 @@ const recentJobs = [
             View All Special Project
           </button>
         </div>
+        
       </div>
     </div>
   );
