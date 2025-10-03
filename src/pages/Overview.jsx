@@ -16,6 +16,7 @@ import usersImage from '../assets/admin/dasbhoard/users.png'
 import jobsImage from '../assets/admin/dasbhoard/jobs.png'
 import specialsImage from '../assets/admin/dasbhoard/specials.png'
 import earningsImage from '../assets/admin/dasbhoard/earnings.png'
+import dotImage from '../assets/dot.png'
 
 
 
@@ -43,6 +44,56 @@ const Overview = () => {
     { name: "Cancelled", value: 30 },
   ];
   const COLORS = ["#CAFF45", "#686382"];
+
+const recentJobs = [
+  {
+    title: "Web Developer",
+    company: "Tech Corp",
+    budget: "200",
+    payment: "50",
+    applications: "12 applications",
+    time: "2 hours ago",
+    status: "Active",
+  },
+  {
+    title: "UI/UX Designer",
+    company: "Creative Studio",
+    budget: "350",
+    payment: "100",
+    applications: "8 applications",
+    time: "5 hours ago",
+    status: "Active",
+  },
+  {
+    title: "Mobile App Developer",
+    company: "Appify Ltd",
+    budget: "500",
+    payment: "150",
+    applications: "20 applications",
+    time: "1 day ago",
+    status: "Assigned",
+  },
+  {
+    title: "Content Writer",
+    company: "Bright Media",
+    budget: "120",
+    payment: "30",
+    applications: "15 applications",
+    time: "3 days ago",
+    status: "Active",
+  },
+  {
+    title: "Digital Marketer",
+    company: "Growth Hub",
+    budget: "400",
+    payment: "80",
+    applications: "10 applications",
+    time: "1 week ago",
+    status: "Assigned",
+  },
+];
+  
+
 
   return (
     <div className="p-6">
@@ -116,34 +167,91 @@ const Overview = () => {
       </div>
 
       {/* Jobs + Projects Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className=" mt-20  grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Recent Jobs */}
-        <div className="p-4 shadow rounded-2xl bg-white">
-          <h3 className="font-semibold mb-2">Recent Jobs</h3>
-          <div className="border p-3 rounded-lg mb-2 flex justify-between">
-            <div>
-              <p className="font-semibold">Web Developer</p>
-              <p className="text-sm text-gray-500">Tech Corp - $200</p>
-            </div>
-            <span className="bg-green-100 text-green-600 px-2 py-1 rounded text-sm">
-              Active
-            </span>
+        <div className="p-4 rounded-[10px] border
+         border-[#686382]/50">
+          <div className="mb-5">
+            <h3 className="font-bold text-sm mb-1">Recent Jobs</h3>
+            <p lang="text-black/70">Latest job postings from clients</p>
           </div>
+          <div className="mb-2 flex flex-col gap-3 justify-between">
+            {/* card */}
+            {recentJobs.map((item,index)=>{
+              return (
+                <div className="
+                rounded-[10px] border
+         border-[#686382]/50 p-4 w-full flex justify-between items-center"
+              key={index}>
+              {/* card left */}
+              <div>
+                <h1 className="font-bold ">{item.title}</h1>
+                <p className="text-sm text-black/70 mt-1">{item.company}</p>
+                <div className="mt-3 text-sm flex items-center gap-1">
+                  <span >${item.budget}</span>
+                  <img src={dotImage} alt="dote" />
+                  <span>{item.applications}</span>
+                  <img src={dotImage} alt="dote" />
+                  <span className="text-black/50">{item.time}</span>
+                </div>
+              </div>
+              {/* card right */}
+              <p className={`
+              ${ item.status === "Active" ? 'bg-[#CAFF45] text-[#686382]'
+                : item.status === "Assigned" ? "bg-[#A49ACF] text-white" : ""
+              } px-3 py-1 
+              rounded-[50px] text-[10px]`}>
+                {item.status}
+              </p>
+            </div>
+              )
+            })}
+
+          </div>
+          <button className="w-full cursor-pointer mt-3 font-bold py-2 border border-[#686382]/50 rounded-[10px]">
+            View All Jobs
+          </button>
         </div>
 
         {/* Special Projects */}
-        <div className="p-4 shadow rounded-2xl bg-white">
-          <h3 className="font-semibold mb-2">Special Projects</h3>
-          <div className="border p-3 rounded-lg mb-2 flex justify-between">
-            <div>
-              <p className="font-semibold">Web Developer</p>
-              
-              <p className="text-sm text-gray-500">Tech Corp - $300</p>
-            </div>
-            <span className="bg-blue-100 text-blue-600 px-2 py-1 rounded text-sm">
-              Proposal Sent
-            </span>
+        <div className="p-4 rounded-[10px] border
+         border-[#686382]/50">
+          <div className="mb-5">
+            <h3 className="font-bold text-sm mb-1">Special Projects</h3>
+            <p lang="text-black/70">Projects requiring admin proposals</p>
           </div>
+          <div className="mb-2 flex flex-col gap-3 justify-between">
+            {/* card */}
+            {recentJobs.map((item,index)=>{
+              return (
+                <div className="
+                rounded-[10px] border
+         border-[#686382]/50 p-4 w-full flex justify-between items-center"
+              key={index}>
+              {/* card left */}
+              <div>
+                <h1 className="font-bold ">{item.title}</h1>
+                <p className="text-sm text-black/70 mt-1">{item.company}</p>
+                <div className="mt-3 text-sm flex items-center gap-1">
+                  <span >${item.budget}</span>
+                  <img src={dotImage} alt="dote" />
+                  <span>{item.applications}</span>
+                  <img src={dotImage} alt="dote" />
+                  <span className="text-black/50">{item.time}</span>
+                </div>
+              </div>
+              {/* card right */}
+              <p className="bg-[#CAFF45] text-[#686382] px-3 py-1 rounded-[50px] text-[10px]">
+                {item.status}
+              </p>
+            </div>
+              )
+            })}
+
+          </div>
+          <button className="w-full cursor-pointer mt-3 font-bold py-2 border border-[#686382]/50 rounded-[10px]">
+            View All Special Project
+          </button>
         </div>
       </div>
     </div>

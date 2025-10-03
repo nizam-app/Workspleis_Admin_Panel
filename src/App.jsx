@@ -17,7 +17,7 @@ const [open, setOpen] = useState(false);
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col">
+      <main className="flex-1 flex justify-center">
         {/* Fixed Navbar */}
         {/* <header className="sticky top-0 left-0 md:left-64 right-0  flex items-center 
         justify-between bg-red-700 p-4">
@@ -42,7 +42,8 @@ const [open, setOpen] = useState(false);
         )} */}
 
         {/* Scrollable Page Content */}
-        <section className="flex-1 overflow-y-auto scrollbar-none no-scrollbar p-10">
+        <section className="mt-10 max-w-[1600px] h-auto flex-1 overflow-y-auto 
+        scrollbar-none no-scrollbar ">
            <Outlet /> 
         </section>
       </main>
