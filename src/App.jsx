@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Outlet } from "react-router"
 import Aside from "./components/Aside"; 
 
-import logo from './assets/aside/logo.png'
+import logo from './assets/aside/logo.svg'
 
 
 function App() { 

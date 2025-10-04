@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import view from '../assets/admin/jobs/view.png'
-import search from '../assets/search.png'
+import view from '../assets/admin/jobs/view.svg'
+import search from '../assets/admin/jobs/search.svg'
 import send from '../assets/admin/special/send.svg'
 import dot from '../assets/admin/special/dot.svg'
 import calender from '../assets/admin/special/calender.svg'

@@ -12,11 +12,11 @@ import {
   ResponsiveContainer
 } from "recharts";
 
-import usersImage from '../assets/admin/dasbhoard/users.png'
-import jobsImage from '../assets/admin/dasbhoard/jobs.png'
-import specialsImage from '../assets/admin/dasbhoard/specials.png'
-import earningsImage from '../assets/admin/dasbhoard/earnings.png'
-import dotImage from '../assets/dot.png'
+import usersImage from '../assets/admin/dasbhoard/users.svg'
+import jobsImage from '../assets/admin/dasbhoard/jobs.svg'
+import specialsImage from '../assets/admin/dasbhoard/specials.svg'
+import earningsImage from '../assets/admin/dasbhoard/earnings.svg'
+import dotImage from '../assets/dot.svg'
 import { Link } from "react-router";
 
 
