@@ -17,6 +17,7 @@ import jobsImage from '../assets/admin/dasbhoard/jobs.png'
 import specialsImage from '../assets/admin/dasbhoard/specials.png'
 import earningsImage from '../assets/admin/dasbhoard/earnings.png'
 import dotImage from '../assets/dot.png'
+import { Link } from "react-router";
 
 
 
@@ -208,9 +209,11 @@ const recentJobs = [
             })}
 
           </div>
+         <Link to='/job-management'> 
           <button className="w-full cursor-pointer mt-3 font-bold py-2 border border-[#686382]/50 rounded-[10px]">
-            View All Jobs
-          </button>
+              View All Jobs
+            </button>
+          </Link>
         </div>
 
         {/* Special Projects */}
@@ -249,9 +252,11 @@ const recentJobs = [
             })}
 
           </div>
-          <button className="w-full cursor-pointer mt-3 font-bold py-2 border border-[#686382]/50 rounded-[10px]">
+        <Link to='/special-projects' >  
+        <button className="w-full cursor-pointer mt-3 font-bold py-2 border border-[#686382]/50 rounded-[10px]">
             View All Special Project
           </button>
+        </Link>
         </div>
         
       </div>

@@ -11,37 +11,9 @@ import completed from '../assets/admin/special/completed.svg'
 import pending from '../assets/admin/special/pending.svg'
 import total from '../assets/admin/special/total.svg'
 import plane from '../assets/admin/special/plane.svg'
+import company from '../assets/admin/special/company.svg'
 
-const jobs = [
-  {
-    id: 1,
-    title: "Full-Stack Web Development",
-    company: "Tech Corp Inc.",
-    type: "Flexible",
-    time: "2 hours ago",
-    price: 50, // number only, no "$"
-    applications: "50 applications",
-    dueDate: "2024-02-15",
-    description:
-      "Looking for an experienced full-stack developer to build a modern web application with React, Node.js, and MongoDB. The project involves creating a comprehensive business management system with user authentication, dashboard, reporting features, and API integrations.",
-    status: "Active",
-    image: "https://i.ibb.co.com/8nVNQ8DZ/image-266.png"
-  },
-  {
-    id: 2,
-    title: "Full-Stack Web Development",
-    company: "Tech Corp Inc.",
-    type: "Flexible",
-    time: "2 hours ago",
-    price: 60, // number only
-    applications: "50 applications",
-    dueDate: "2024-02-15",
-    description:
-      "Looking for an experienced full-stack developer to build a modern web application with React, Node.js, and MongoDB. The project involves creating a comprehensive business management system with user authentication, dashboard, reporting features, and API integrations.",
-    status: "In Progress",
-    image: "https://i.ibb.co.com/8nVNQ8DZ/image-266.png"
-  }
-];
+
 
 const specials = [
   {
@@ -101,7 +73,7 @@ const specials = [
     },
     "preferred_shift": "Morning (8AM-11AM)",
     "submitted_date": "2024-04-21",
-    "status": "Submitted",
+    "status": "Delivered",
     "actions": ["View Project", "Send Proposal"]
   },
   {
@@ -134,6 +106,10 @@ const SpecialProject = () => {
   const [trackModel, setTrackModel] = useState(false);
   const [submitOrder, setSubmitOrder] = useState(false);
   const [viewSubmition, setViewSubmition] = useState(false);
+  const [proposalModel, setProposalModel] = useState(false);
+  const [inReviewModel, setInReviewModel] = useState(false);
+  const [deliveredModel, setDeliveredModel] = useState(false);
+  const [viewProjectModel, setViewProjectModel] = useState(false);
   return (
     <div className="p-6">
       {/* Header */}
@@ -251,7 +227,9 @@ const SpecialProject = () => {
               <div className="flex items-center 
                     justify-between mt-4 text-sm">
 
-                <button className="flex gap-2 border border-[#686382] px-4 py-2 rounded-[10px] 
+                <button 
+                onClick={()=>setViewProjectModel(true)}
+                className="flex gap-2 border border-[#686382] px-4 py-2 rounded-[10px] 
                       text-sm font-semibold cursor-pointer ">
                   <img src={view} alt="view" className='w-[19px] h-[19px]' />
                   View Project
@@ -259,24 +237,29 @@ const SpecialProject = () => {
 
 
                 {job.status === 'Submitted' &&
-                  <button className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
+                  <button 
+                  onClick={()=> setProposalModel(true)}
+                  className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
                       text-sm font-semibold cursor-pointer ">
                     <img src={send} alt="send" />
                     Send Proposal
                   </button>}
 
-                {(job.status === 'In Progress' || job.status === 'In Review') &&
+                {(job.status === 'In Progress' || job.status === 'In Review' ||
+                  job.status === 'Delivered'
+                ) &&
                   <div className='flex gap-3'>
-                    <button 
+                  {job.status !==  'Delivered' && <button 
                     onClick={() => setTrackModel(true)}
                       className="flex gap-2 text-white bg-[#686382] px-4 py-2 rounded-[10px] 
                       text-sm font-semibold cursor-pointer">
                       Track Project
-                    </button>
+                    </button>}
                     <button 
-                    
                     onClick={()=>{
                       job.status === 'In Progress' && setSubmitOrder(true);
+                      job.status === 'In Review'   && setInReviewModel(true);
+                      job.status === 'Delivered' && setDeliveredModel(true);
                     }}
                     
                     className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
@@ -284,7 +267,6 @@ const SpecialProject = () => {
                       Completed Project
                     </button>
                   </div>
-
                 }
 
 
@@ -297,6 +279,10 @@ const SpecialProject = () => {
 
       {trackModel && <TrackerModel onClose={() => setTrackModel(false)} />}
       {submitOrder && <SubmitOrderModel onClose={()=>setSubmitOrder(false)} />}
+      {proposalModel && <ProposalModal onClose={()=>setProposalModel(false)} />}
+      {inReviewModel && <InReviewModal onClose={()=>setInReviewModel(false)} />}
+      {deliveredModel && <DeliveredModal onClose={()=>setDeliveredModel(false)} />}
+      {viewProjectModel && <ViewProjectModel onClose={()=>setViewProjectModel(false)} />}
 
     </div>
   )
@@ -498,6 +484,445 @@ const SubmitOrderModel = ({ onClose }) => {
             className="bg-[#CAFF45] text-[#686382] px-6 py-2 rounded-full text-md font-semibold cursor-pointer"
           >
             Submit
+          </button>
+        </div>
+        
+      </div>
+    </div>
+  );
+};
+
+
+const ProposalModal = ({ onClose }) => {
+  const [cost, setCost] = useState("");
+  const [timeline, setTimeline] = useState("");
+  const [note, setNote] = useState("");
+  const [files, setFiles] = useState([]);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleAddFile = () => {
+    if (selectedFile) {
+      setFiles([...files, selectedFile]);
+      setSelectedFile(null);
+    }
+  };
+
+  const handleRemoveFile = (index) => {
+    const newFiles = files.filter((_, i) => i !== index);
+    setFiles(newFiles);
+  };
+
+  const handleSubmit = () => {
+    alert("Proposal Sent!");
+    onClose();
+  };
+
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setShow(true), 10);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+      <div
+        className={`bg-white rounded-2xl w-full max-w-2xl p-6 shadow-lg transform transition-all duration-300 
+          ${show ? "scale-100 opacity-100" : "scale-90 opacity-0"} relative`}
+      >
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="text-black bg-black/20 text-[20px] px-3 py-1.5 rounded-[50px]
+            absolute right-5 top-5 cursor-pointer"
+        >
+          ✕
+        </button>
+
+        {/* Title */}
+        <h2 className="text-[22px] font-bold mb-1">
+          Create Proposal for Enterprise CRM System Development
+        </h2>
+        <p className="text-black/70 mb-5">
+          Send a detailed proposal to MegaCorp Industries
+        </p>
+
+        {/* Cost & Timeline */}
+        <div className="grid grid-cols-2 gap-4 mb-5">
+          <div>
+            <label className="block font-bold mb-1">Estimated Cost</label>
+            <input
+              type="text"
+              value={cost}
+              onChange={(e) => setCost(e.target.value)}
+              placeholder="$50,000"
+              className="w-full border border-[#686382]/60 bg-black/6 
+              rounded-[5px] px-3 py-2 outline-none"
+            />
+          </div>
+          <div>
+            <label className="block font-bold mb-1">Time Line</label>
+            <input
+              type="text"
+              value={cost}
+              onChange={(e) => setCost(e.target.value)}
+              placeholder="10 days"
+              className="w-full border border-[#686382]/60 bg-black/6 
+              rounded-[5px] px-3 py-2 outline-none"
+            />
+          </div>
+        </div>
+
+        {/* Note */}
+        <div className="mb-5">
+          <label className="block font-bold mb-1">Note for client</label>
+          <textarea
+            value={note}
+            onChange={(e) => setNote(e.target.value)}
+            rows={3}
+            placeholder="Description your approach to this project..."
+            className="w-full border border-[#686382]/60 bg-black/6 
+              rounded-[5px] px-3 py-2 outline-none"
+          />
+        </div>
+
+        {/* File Upload */}
+<div className="mt-6">
+          <label className="block font-semibold mb-1">Attachments</label>
+          <div className="flex gap-2">
+            <input
+              type="file"
+              onChange={(e) => setSelectedFile(e.target.files[0])}
+              className="flex-1  rounded-[10px] px-3 py-2 bg-[#EAE9E9] text-gray-600 outline-none"
+            />
+            <button
+              onClick={handleAddFile}
+              className="bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] "
+            >
+              Add
+            </button>
+          </div>
+          {/* Uploaded files list */}
+          <div className="mt-3 space-y-2">
+            {files.map((file, index) => (
+              <div
+                key={index}
+                className="flex justify-between items-center bg-[#EAE9E9] px-3 py-2 rounded-[10px]"
+              >
+                <span className="text-sm text-gray-700">{file.name}</span>
+                <button
+                  onClick={() => handleRemoveFile(index)}
+                  className="text-gray-400 hover:text-red-500 text-xl font-bold"
+                >
+                  &times;
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex justify-end mt-6">
+          <button
+            onClick={handleSubmit}
+            className="bg-[#CAFF45] text-[#686382] px-6 py-2 rounded-full text-md font-semibold cursor-pointer"
+          >
+            Submit
+          </button>
+        </div>
+
+
+      </div>
+    </div>
+  );
+};
+
+
+const InReviewModal = ({ onClose }) => {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setShow(true), 10);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+      <div
+        className={`bg-white rounded-2xl w-full max-w-xl p-6 shadow-lg transform transition-all duration-300 
+          ${show ? "scale-100 opacity-100" : "scale-90 opacity-0"} relative`}
+      >
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="text-black bg-black/20 text-[20px] px-3 py-1.5 rounded-[50px]
+            absolute right-5 top-5 cursor-pointer"
+        >
+          ✕
+        </button>
+
+        {/* Title */}
+        <h2 className="text-[22px] font-bold mb-1">Review Completion</h2>
+        <p className="text-[#4B4646]/80 mb-4">The admin has completed this order.</p>
+
+        {/* Message */}
+        <div className="mb-6">
+          <h3 className="font-semibold mb-2">Message from Service Provider</h3>
+          <div className="bg-[#F4F3F3] rounded-[10px] p-3 text-black/80 
+          leading-relaxed">
+            All plumbing issues have been resolved. Replaced the faulty pipes
+            and installed new faucets as requested. System tested and working
+            perfectly.
+          </div>
+        </div>
+
+        {/* Attachments */}
+        <div>
+          <h3 className="font-semibold mb-2">Attachments</h3>
+          <ul className="space-y-2">
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 text-blue-600 hover:underline"
+              >
+                📎 photos.pdf
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 text-blue-600 hover:underline"
+              >
+                📎 projects.zip
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const DeliveredModal = ({ onClose }) => {
+  const [show, setShow] = useState(false);
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+  const [message, setMessage] = useState("");
+
+  useEffect(() => {
+    setTimeout(() => setShow(true), 10);
+  }, []);
+
+  const handleSubmit = () => {
+    alert(`Review Submitted!\nRating: ${rating}\nMessage: ${message}`);
+    onClose();
+  };
+
+  return (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+      <div
+        className={`bg-white rounded-2xl w-full max-w-xl p-6 shadow-lg transform transition-all duration-300 
+          ${show ? "scale-100 opacity-100" : "scale-90 opacity-0"} relative`}
+      >
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="text-black bg-black/20 text-[20px] px-3 py-1.5 rounded-[50px]
+            absolute right-5 top-5 cursor-pointer"
+        >
+          ✕
+        </button>
+
+        {/* Title */}
+        <h2 className="text-[22px] font-bold mb-1">Review Completion</h2>
+        <p className="text-[#4B4646]/80 mb-4">The admin has completed this order.</p>
+
+        {/* Message */}
+        <div className="mb-6">
+          <h3 className="font-semibold mb-2">Message from Service Provider</h3>
+          <div className="bg-[#F4F3F3] rounded-[10px] p-3 text-black/80 
+          leading-relaxed">
+            All plumbing issues have been resolved. Replaced the faulty pipes
+            and installed new faucets as requested. System tested and working
+            perfectly.
+          </div>
+        </div>
+
+        {/* Attachments */}
+        <div>
+          <h3 className="font-semibold mb-2">Attachments</h3>
+          <ul className="space-y-2">
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 text-blue-600 hover:underline"
+              >
+                📎 photos.pdf
+              </a>
+            </li>
+            <li>
+              <a
+                href="#"
+                className="flex items-center gap-2 text-blue-600 hover:underline"
+              >
+                📎 projects.zip
+              </a>
+            </li>
+          </ul>
+        </div>
+
+
+        {/* Rating & Review */}
+        <div className="border border-black/30 rounded-[25px] p-4 mt-5">
+          <h3 className="mb-2">Ratings</h3>
+          <div className="flex items-center gap-1 mb-4">
+            {[...Array(5)].map((_, index) => {
+              const starValue = index + 1;
+              return (
+                <svg
+                  key={index}
+                  onClick={() => setRating(starValue)}
+                  onMouseEnter={() => setHover(starValue)}
+                  onMouseLeave={() => setHover(0)}
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill={
+                    starValue <= (hover || rating) ? "#a855f7" : "#d1d5db"
+                  }
+                  className="w-6 h-6 cursor-pointer transition-colors"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.286 3.946a1 1 0 00.95.69h4.15c.969 0 1.371 1.24.588 1.81l-3.36 2.44a1 1 0 00-.364 1.118l1.286 3.946c.3.921-.755 1.688-1.54 1.118l-3.36-2.44a1 1 0 00-1.175 0l-3.36 2.44c-.784.57-1.838-.197-1.539-1.118l1.285-3.946a1 1 0 00-.364-1.118L2.075 9.373c-.783-.57-.38-1.81.588-1.81h4.15a1 1 0 00.95-.69l1.286-3.946z" />
+                </svg>
+              );
+            })}
+          </div>
+
+          <label className="block mb-2">Message</label>
+          <textarea
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            placeholder="wow, that was a great experience."
+            className="w-full border border-[#686382]/40 rounded-[10px] px-3 py-3 
+            h-20 outline-none"
+          />
+
+          <button
+            onClick={handleSubmit}
+            className="mt-4 bg-[#CAFF45] text-[#A49ACF] 
+            px-6 py-2 rounded-full font-semibold cursor-pointer"
+          >
+            Submit Review
+          </button>
+        
+      </div>
+      </div>
+    </div>
+  );
+};
+
+
+const ViewProjectModel = ({ onClose }) => {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShow(true), 20);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+      <div
+        className={`bg-white rounded-xl w-[800px] max-h-[90vh] overflow-y-auto p-6  
+        transform transition-all duration-300 relative 
+        ${show ? "scale-100 opacity-100" : "scale-90 opacity-0"}`}
+      >
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="text-black bg-black/20 text-[20px] px-3 py-1.5 rounded-[50px]
+            absolute right-5 top-5 cursor-pointer"
+        >
+          ✕
+        </button>
+
+        {/* Job Title */}
+        <div className="pb-4">
+          <h2 className="text-[28px] font-bold">Enterprise CRM System Development</h2>
+          <p className="text-black/70">MegaCorp Industries • 2024-02-15</p>
+        </div>
+
+        {/* Header Image */}
+        <img
+          src="https://i.ibb.co.com/xtM4F6rp/photo-1688560952189-ef386cea744e-1.png"
+          alt="Job Banner"
+          className="rounded-lg w-full h-60 object-cover"
+        />
+
+        {/* Job Info */}
+        <div className="grid grid-cols-4 gap-4 pt-6 text-sm">
+          <div>
+            <span className="block text-black/70">Category</span>
+            <span className="font-bold">System Development</span>
+          </div>
+          <div>
+            <span className="block text-black/70">Budget Range</span>
+            <span className="font-bold">$5,000 - $10,000</span>
+          </div>
+          <div>
+            <span className="block text-black/70">Urgency</span>
+            <span className="font-bold">Immediate</span>
+          </div>
+          <div>
+            <span className="block text-black/70">Status</span>
+            <span className="inline-block bg-[#CAFF45] text-[#686382] px-2 py-0.5 rounded-full text-xs mt-2">
+              Submitted
+            </span>
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="mt-6 rounded-[10px] p-4 bg-black/6">
+          <h3 className="text-[16px] font-bold mb-3 flex items-center gap-2">
+            <img src={company} alt="company" />
+             Contact Information</h3>
+          <div className="grid grid-cols-4 gap-4 text-sm">
+            <div>
+              <span className="block text-black/70">Name</span>
+              <span className="font-bold">Sarah Johnson</span>
+            </div>
+            <div>
+              <span className="block text-black/70">Role</span>
+              <span className="font-bold">IT Director</span>
+            </div>
+            <div>
+              <span className="block text-black/70">Best time to contact</span>
+              <span className="font-bold">Weekdays 9 AM - 5 PM EST</span>
+            </div>
+            <div>
+              <span className="block text-black/70">Preferred Communication</span>
+              <span className="font-bold">Email</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Project Description */}
+        <div className="py-6">
+          <h3 className="text-[18px] font-bold mb-2">Project Description</h3>
+          <p className="text-black/70 leading-relaxed ">
+            We need a comprehensive CRM system that can handle our enterprise-level
+            operations with custom workflows, advanced reporting, and integration
+            capabilities with our existing systems.
+          </p>
+        </div>
+
+        {/* Footer Buttons */}
+        <div className="flex justify-end gap-3 pt-4">
+          <button
+            onClick={onClose}
+            className="bg-[#686382] text-white px-5 py-2 rounded-lg font-semibold cursor-pointer"
+          >
+            Close
+          </button>
+          <button
+            className="bg-[#CAFF45] text-[#686382] px-6 py-2 
+            rounded-lg font-semibold cursor-pointer"
+          >
+            Start Conversation
           </button>
         </div>
       </div>

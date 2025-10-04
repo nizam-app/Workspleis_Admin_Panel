@@ -1,35 +1,35 @@
 import React from 'react'
 
-const jobs = [
-  {
-    id: 1,
-    title: "Full-Stack Web Development",
-    company: "Tech Corp Inc.",
-    type: "Flexible",
-    time: "2 hours ago",
-    price: "$50",
-    applications: "50 applications",
-    dueDate: "2024-02-15",
-    description:
-      "Looking for an experienced full-stack developer to build a modern web application with React, Node.js, and MongoDB. The project involves creating a comprehensive business management system with user authentication, dashboard, reporting features, and API integrations.",
-    status: "Active",
-    image: "https://via.placeholder.com/60"
-  },
-  {
-    id: 2,
-    title: "Full-Stack Web Development",
-    company: "Tech Corp Inc.",
-    type: "Flexible",
-    time: "2 hours ago",
-    price: "$60",
-    applications: "50 applications",
-    dueDate: "2024-02-15",
-    description:
-      "Looking for an experienced full-stack developer to build a modern web application with React, Node.js, and MongoDB. The project involves creating a comprehensive business management system with user authentication, dashboard, reporting features, and API integrations.",
-    status: "In Progress",
-    image: "https://via.placeholder.com/60"
-  }
-];
+  const jobs = [
+    {
+      id: 1,
+      title: "Full-Stack Web Development",
+      company: "Tech Corp Inc.",
+      type: "Flexible",
+      time: "2 hours ago",
+      price: "$50",
+      applications: "50 applications",
+      dueDate: "2024-02-15",
+      description:
+        "Looking for an experienced full-stack developer to build a modern web application with React, Node.js, and MongoDB. The project involves creating a comprehensive business management system with user authentication, dashboard, reporting features, and API integrations.",
+      status: "Active",
+      image: "https://via.placeholder.com/60"
+    },
+    {
+      id: 2,
+      title: "Full-Stack Web Development",
+      company: "Tech Corp Inc.",
+      type: "Flexible",
+      time: "2 hours ago",
+      price: "$60",
+      applications: "50 applications",
+      dueDate: "2024-02-15",
+      description:
+        "Looking for an experienced full-stack developer to build a modern web application with React, Node.js, and MongoDB. The project involves creating a comprehensive business management system with user authentication, dashboard, reporting features, and API integrations.",
+      status: "In Progress",
+      image: "https://via.placeholder.com/60"
+    }
+  ];
 
 const Proposals =() =>{
   return (

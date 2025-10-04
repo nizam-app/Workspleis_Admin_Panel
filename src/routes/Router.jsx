@@ -7,6 +7,7 @@ import JobManagement from "../pages/JobManagement";
 import SpecialProject from "../pages/SpecialProject";
 import Conversation from "../pages/Conversation";
 import Proposals from "../pages/Proposals";
+import UserProfile from "../pages/UserProfile";
  
 
 
@@ -43,6 +44,10 @@ const Router = createBrowserRouter([
             { 
                path : 'user-management',
                Component : UserManagement,
+            },
+            { 
+               path : 'user-profile',
+               Component : UserProfile,
             },
             
             // { 
