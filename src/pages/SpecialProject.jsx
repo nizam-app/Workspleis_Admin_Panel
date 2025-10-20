@@ -15,83 +15,92 @@ import company from '../assets/admin/special/company.svg'
 
 
 
-const specials = [
+
+const specialProjects = [
   {
-    "id": "proj-001",
-    "title": "Enterprise CRM System Development",
-    "company": "MegaCorp Industries",
-    "category": "Software Development",
-    "description": "Looking for an experienced full-stack developer to build a modern web application with React, Node.js, and MongoDB. The project involves creating a comprehensive business management system with user authentication, dashboard, reporting features, and API integrations.",
-    "budget": {
-      "amount": 500,
-      "currency": "USD"
-    },
-    "preferred_shift": "Morning (9AM-12PM)",
-    "submitted_date": "2024-01-15",
-    "status": "Submitted",
-    "actions": ["View Project", "Send Proposal"]
+    title: "E-commerce Website Redesign",
+    category: "Web Development",
+    description: "Redesign an existing Shopify store with a modern, conversion-focused layout.",
+    urgency: "Immediate",
+    nda: true,
+    budgetRange: "$800 - $1000",
+    photos: ["https://res.cloudinary.com/dior4n7ve/image/upload/v1760263759/main-sample.png"],
+    name: "Jessica Brown",
+    role: "Business Owner",
+    prefferredCommunication: "Email",
+    contactTime: "Morning",
+    createdBy: "2024-02-15T12:00:00Z", // Example ObjectId
+    status: "Submitted",
   },
   {
-    "id": "proj-002",
-    "title": "SaaS Analytics Dashboard",
-    "company": "DataWave Solutions",
-    "category": "Software Development",
-    "description": "Develop an interactive analytics dashboard for a SaaS product using React, D3.js and Node.js. Features include real-time charts, user roles, exportable reports and RESTful API integrations.",
-    "budget": {
-      "amount": 1200,
-      "currency": "USD"
-    },
-    "preferred_shift": "Afternoon (1PM-5PM)",
-    "submitted_date": "2024-02-03",
-    "status": "Sent Proposal",
-    "actions": ["View Project", "Send Proposal"]
+    title: "Mobile App Prototype for Fitness Tracking",
+    category: "UI/UX Design",
+    description: "Create a clickable Figma prototype for a cross-platform fitness tracking app.",
+    urgency: "1-2 weeks",
+    nda: true,
+    budgetRange: "$400 - $600",
+    photos: ["https://res.cloudinary.com/dior4n7ve/image/upload/v1760263759/main-sample.png"],
+    name: "Daniel Lee",
+    role: "Startup Founder",
+    prefferredCommunication: "Phone",
+    contactTime: "Afternoon",
+    createdBy: "2024-02-15T12:00:00Z",
+    status: "Proposal_Sent",
   },
   {
-    "id": "proj-003",
-    "title": "E-commerce Platform Migration",
-    "company": "RetailNext",
-    "category": "E-commerce / Software",
-    "description": "Migrate legacy e-commerce platform to a modern stack using Next.js, Node.js, and MongoDB. Required: payment gateway integration, inventory sync, search optimization and admin dashboard.",
-    "budget": {
-      "amount": 2500,
-      "currency": "USD"
-    },
-    "preferred_shift": "Evening (5PM-9PM)",
-    "submitted_date": "2024-03-10",
-    "status": "In Progress",
-    "actions": ["View Project", "Send Proposal"]
+    title: "Custom CRM Dashboard",
+    category: "Software Development",
+    description: "Develop a tailored CRM dashboard with analytics, task tracking, and user management.",
+    urgency: "Immediate",
+    nda: false,
+    budgetRange: "$1500 - $2000",
+    photos: ["https://res.cloudinary.com/dior4n7ve/image/upload/v1760263759/main-sample.png"],
+    name: "Sophia Martinez",
+    role: "Project Manager",
+    prefferredCommunication: "In_app",
+    contactTime: "Morning",
+    createdBy: "2024-02-15T12:00:00Z",
+    status: "In_Progress",
   },
   {
-    "id": "proj-004",
-    "title": "Mobile-first Inventory App",
-    "company": "LogiTrak Inc.",
-    "category": "Mobile / Software Development",
-    "description": "Build a mobile-first inventory management app with offline sync, barcode scanning and cloud-based reporting. Tech suggestions: React Native, Node.js, MongoDB/Firestore.",
-    "budget": {
-      "amount": 900,
-      "currency": "USD"
-    },
-    "preferred_shift": "Morning (8AM-11AM)",
-    "submitted_date": "2024-04-21",
-    "status": "Delivered",
-    "actions": ["View Project", "Send Proposal"]
+    title: "Corporate Branding Package",
+    category: "Graphic Design",
+    description: "Design a complete brand identity including logo, color palette, and marketing materials.",
+    urgency: "Flexible",
+    nda: true,
+    budgetRange: "$300 - $500",
+    photos: ["https://res.cloudinary.com/dior4n7ve/image/upload/v1760263759/main-sample.png"],
+    name: "Michael Carter",
+    role: "Marketing Director",
+    prefferredCommunication: "Email",
+    contactTime: "Evening",
+    createdBy: "2024-02-15T12:00:00Z",
+    status: "In_Review",
   },
   {
-    "id": "proj-005",
-    "title": "HR Onboarding Portal",
-    "company": "PeopleFirst HR",
-    "category": "Software Development",
-    "description": "Create an HR onboarding portal with secure user authentication, document management, progress tracking, and reporting. Backend APIs, role-based access and a clean admin UI required.",
-    "budget": {
-      "amount": 700,
-      "currency": "USD"
-    },
-    "preferred_shift": "Morning (9AM-12PM)",
-    "submitted_date": "2024-05-05",
-    "status": "In Review",
-    "actions": ["View Project", "Send Proposal"]
-  }
-]
+    title: "SEO Optimization for Travel Blog",
+    category: "Digital Marketing",
+    description: "Optimize on-page SEO, improve keyword targeting, and build high-quality backlinks.",
+    urgency: "1-2 weeks",
+    nda: false,
+    budgetRange: "$250 - $400",
+    photos: ["https://res.cloudinary.com/dior4n7ve/image/upload/v1760263759/main-sample.png"],
+    name: "Emily Johnson",
+    role: "Content Creator",
+    prefferredCommunication: "In_app",
+    contactTime: "Afternoon",
+    createdBy: "652e91b2f7a5a23b4c7d8e95",
+    status: "Delivered",
+  },
+];
+
+const statusStyles = {
+  Submitted: "bg-gray-200 text-gray-600",
+  Proposal_Sent: "bg-[#CAFF45] text-[#686382]",
+  In_Progress: "bg-blue-100 text-blue-700",
+  In_Review: "bg-purple-200 text-purple-700",
+  Delivered: "bg-green-200 text-green-700",
+};
 
 
 // Stats
@@ -135,42 +144,61 @@ const SpecialProject = () => {
 
 
       {/* Search & Filter */}
-      <div className="flex items-center gap-4 mb-6 mt-8">
-        <div className="flex  gap-2 items-center bg-[#A49ACF]/8 border border-[#686382]
-              rounded-[50px] px-3 py-2 flex-1">
-          {/* Search Icon */}
-          <img src={search} alt="search" className=' w-[17px]' />
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 mt-8">
+        {/* Search Field */}
+        <div className="flex items-center gap-2 bg-[#F9F8FD] border border-[#686382]/30 rounded-full px-4 py-2 flex-1">
+          <img src={search} alt="search" className="w-[17px] opacity-60" />
           <input
             type="text"
             placeholder="Search Jobs..."
-            className="outline-none flex-1 py-1 "
+            className="flex-1 bg-transparent outline-none text-sm placeholder:text-black/50"
           />
         </div>
 
+        {/* Custom Dropdown */}
+        <div className="relative">
+          <select
+            className="appearance-none border border-[#686382]/30 rounded-full pl-4 pr-10 py-2 text-sm outline-none cursor-pointer bg-white hover:bg-gray-50 font-medium"
+          >
+            <option>All Status</option>
+            <option>Submitted</option>
+            <option>Proposal Sent</option>
+            <option>In Progress</option>
+            <option>In Review</option>
+            <option>Delivered</option>
+          </select>
 
-        <select className="border border-[#686382] 
-              rounded-[50px] px-3 py-3 outline-none">
-          <option>All Status</option>
-          <option>Active</option>
-          <option>In Progress</option>
-          <option>Completed</option>
-        </select>
+          {/* Dropdown Arrow */}
+          <svg
+            className="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black/60"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
       </div>
 
       {/* Job Cards */}
       <div className="space-y-4">
-        {specials.map((job) => (
+        {specialProjects.map((job) => (
           <div
             key={job.id}
             className="border border-[#686382]/50 rounded-[10px] p-4 bg-white"
           >
             <div className='flex'>
               {/* Image */}
+
               <img
-                src={job.image}
+                src={job.photos?.[0] || job.photos || "https://via.placeholder.com/80x55?text=No+Image"}
                 alt={job.title}
                 className="w-[80px] h-[55px] rounded-lg object-cover mr-4 border"
               />
+
+
               <div className='w-full'>
                 <div className="flex items-center justify-between">
                   <h3 className="font-bold">{job.title}</h3>
@@ -185,13 +213,13 @@ const SpecialProject = () => {
                   </span>
                 </div>
                 <div className='flex items-center gap-1'>
-                  <p className="text-sm flex gap-1">
+                  {/* <p className="text-sm flex gap-1">
                     <img src={user} alt="user" />
                     <span className='text-black/60 font-bold'>{job.company}</span>
-                  </p>
+                  </p> */}
                   <img src={dot} alt="dote" />
                   <p className="text-sm flex gap-1">
-                    <span className='text-black/60 '>{job.category}</span>
+                    <span className='text-black/60 mt-1'>{job.category}</span>
                   </p>
                 </div>
               </div>
@@ -207,29 +235,36 @@ const SpecialProject = () => {
               {/* Meta Info */}
               <div className="flex items-center gap-4 text-sm mt-3">
                 <span className="flex items-center gap-1 ">
-                  <span className='text-[#CAFF45]'>$</span>
-                  {job.budget.amount}
+                  <span className='text-[#686382]'>{job.budgetRange}</span>
                 </span>
                 <span className="flex 
                       items-center gap-1 text-black/50">
                   {/* Clock Icon */}
                   <img src={clock} alt="clock" />
-                  {job.preferred_shift}
+                  {job.contactTime}
                 </span>
                 <span className="flex items-center gap-1 text-black/50">
-                  {/* Clock Icon */}
-                  <img src={calender} alt="calender" />
-                  {job.submitted_date}
+                  <img src={calender} alt="calendar" />
+                  {job.createdBy
+                    ? new Date(job.createdBy).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })
+                    : "N/A"}
                 </span>
+
+
+
               </div>
 
               {/* Footer */}
               <div className="flex items-center 
                     justify-between mt-4 text-sm">
 
-                <button 
-                onClick={()=>setViewProjectModel(true)}
-                className="flex gap-2 border border-[#686382] px-4 py-2 rounded-[10px] 
+                <button
+                  onClick={() => setViewProjectModel(true)}
+                  className="flex gap-2 border border-[#686382] px-4 py-2 rounded-[10px] 
                       text-sm font-semibold cursor-pointer ">
                   <img src={view} alt="view" className='w-[19px] h-[19px]' />
                   View Project
@@ -237,32 +272,38 @@ const SpecialProject = () => {
 
 
                 {job.status === 'Submitted' &&
-                  <button 
-                  onClick={()=> setProposalModel(true)}
-                  className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
+                  <button
+                    onClick={() => setProposalModel(true)}
+                    className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
                       text-sm font-semibold cursor-pointer ">
                     <img src={send} alt="send" />
                     Send Proposal
-                  </button>}
+                  </button>
+                }
+                {job.status === 'Proposal_Sent' &&
+                  <button
+                    onClick={() => setProposalModel(true)}
+                    className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
+                      text-sm font-semibold cursor-pointer ">
+                    <img src={view} alt="view" className='w-[19px] h-[19px]' />
+                  View Project
+                  </button>
+                }
 
-                {(job.status === 'In Progress' || job.status === 'In Review' ||
+
+
+                {(job.status === 'In_Progress' || job.status === 'In_Review' ||
                   job.status === 'Delivered'
                 ) &&
                   <div className='flex gap-3'>
-                  {job.status !==  'Delivered' && <button 
-                    onClick={() => setTrackModel(true)}
-                      className="flex gap-2 text-white bg-[#686382] px-4 py-2 rounded-[10px] 
-                      text-sm font-semibold cursor-pointer">
-                      Track Project
-                    </button>}
-                    <button 
-                    onClick={()=>{
-                      job.status === 'In Progress' && setSubmitOrder(true);
-                      job.status === 'In Review'   && setInReviewModel(true);
-                      job.status === 'Delivered' && setDeliveredModel(true);
-                    }}
                     
-                    className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
+                    <button
+                      onClick={() => {
+                        job.status === 'In_Progress' && setSubmitOrder(true);
+                        job.status === 'In_Review' && setInReviewModel(true);
+                        job.status === 'Delivered' && setDeliveredModel(true);
+                      }}
+                      className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
                       text-sm font-semibold cursor-pointer ">
                       Completed Project
                     </button>
@@ -278,11 +319,11 @@ const SpecialProject = () => {
 
 
       {trackModel && <TrackerModel onClose={() => setTrackModel(false)} />}
-      {submitOrder && <SubmitOrderModel onClose={()=>setSubmitOrder(false)} />}
-      {proposalModel && <ProposalModal onClose={()=>setProposalModel(false)} />}
-      {inReviewModel && <InReviewModal onClose={()=>setInReviewModel(false)} />}
-      {deliveredModel && <DeliveredModal onClose={()=>setDeliveredModel(false)} />}
-      {viewProjectModel && <ViewProjectModel onClose={()=>setViewProjectModel(false)} />}
+      {submitOrder && <SubmitOrderModel onClose={() => setSubmitOrder(false)} />}
+      {proposalModel && <ProposalModal onClose={() => setProposalModel(false)} />}
+      {inReviewModel && <InReviewModal onClose={() => setInReviewModel(false)} />}
+      {deliveredModel && <DeliveredModal onClose={() => setDeliveredModel(false)} />}
+      {viewProjectModel && <ViewProjectModel onClose={() => setViewProjectModel(false)} />}
 
     </div>
   )
@@ -486,7 +527,7 @@ const SubmitOrderModel = ({ onClose }) => {
             Submit
           </button>
         </div>
-        
+
       </div>
     </div>
   );
@@ -585,7 +626,7 @@ const ProposalModal = ({ onClose }) => {
         </div>
 
         {/* File Upload */}
-<div className="mt-6">
+        <div className="mt-6">
           <label className="block font-semibold mb-1">Attachments</label>
           <div className="flex gap-2">
             <input
@@ -809,8 +850,8 @@ const DeliveredModal = ({ onClose }) => {
           >
             Submit Review
           </button>
-        
-      </div>
+
+        </div>
       </div>
     </div>
   );
@@ -879,7 +920,7 @@ const ViewProjectModel = ({ onClose }) => {
         <div className="mt-6 rounded-[10px] p-4 bg-black/6">
           <h3 className="text-[16px] font-bold mb-3 flex items-center gap-2">
             <img src={company} alt="company" />
-             Contact Information</h3>
+            Contact Information</h3>
           <div className="grid grid-cols-4 gap-4 text-sm">
             <div>
               <span className="block text-black/70">Name</span>

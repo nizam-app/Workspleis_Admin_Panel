@@ -18,7 +18,8 @@ const Router = createBrowserRouter([
         Component : App,
         children :[
             { 
-               index : true,
+               // index : true,
+               path: '/',
                Component : overview ,  
             },
             { 

@@ -18,30 +18,6 @@ const [open, setOpen] = useState(false);
 
       {/* Main Content */}
       <main className="flex-1 flex justify-center">
-        {/* Fixed Navbar */}
-        {/* <header className="sticky top-0 left-0 md:left-64 right-0  flex items-center 
-        justify-between bg-red-700 p-4">
-          <h1 className="text-white font-bold">My App</h1> */}
-
-          {/* Mobile menu button */}
-          {/* <button
-            className="md:hidden text-white"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? "close" : "open"}
-          </button> */}
-        {/* </header> */}
-
-        {/* Mobile Dropdown Menu (below fixed header) */}
-        {/* {open && (
-          <nav className="md:hidden bg-green-700 p-4 space-y-2 mt-14">
-            <a href="#" className="block text-white">Dashboard</a>
-            <a href="#" className="block text-white">Settings</a>
-            <a href="#" className="block text-white">Profile</a>
-          </nav>
-        )} */}
-
-        {/* Scrollable Page Content */}
         <section className="mt-10 max-w-[1600px] h-auto flex-1 overflow-y-auto 
         scrollbar-none no-scrollbar ">
            <Outlet /> 

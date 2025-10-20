@@ -49,27 +49,45 @@ const JobManagement = () => {
       <p className="text-black/70 text-[18px] pt-1">Manage all job postings and applications from clients</p>
 
       {/* Search & Filter */}
-      <div className="flex items-center gap-4 mb-6 mt-8">
-        <div className="flex  gap-2 items-center bg-[#A49ACF]/8 border border-[#686382]
-        rounded-[50px] px-3 py-2 flex-1">
-          {/* Search Icon */}
-          <img src={search} alt="search" className=' w-[17px]' />
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6 mt-8">
+        {/* Search Field */}
+        <div className="flex items-center gap-2 bg-[#F9F8FD] border border-[#686382]/30 rounded-full px-4 py-2 flex-1">
+          <img src={search} alt="search" className="w-[17px] opacity-60" />
           <input
             type="text"
             placeholder="Search Jobs..."
-            className="outline-none flex-1 py-1 "
+            className="flex-1 bg-transparent outline-none text-sm placeholder:text-black/50"
           />
         </div>
 
+        {/* Custom Dropdown */}
+        <div className="relative">
+          <select
+            className="appearance-none border border-[#686382]/30 rounded-full pl-4 pr-10 py-2 text-sm outline-none cursor-pointer bg-white hover:bg-gray-50 font-medium"
+          >
+            <option>All Status</option>
+            <option>Open</option>
+            <option>In Progress</option>
+            <option>Assigned</option>
+            <option>In review</option>
+            <option>Delivered</option>
+          </select>
 
-        <select className="border border-[#686382] 
-        rounded-[50px] px-3 py-3 outline-none">
-          <option>All Status</option>
-          <option>Active</option>
-          <option>In Progress</option>
-          <option>Completed</option>
-        </select>
+          {/* Dropdown Arrow */}
+          <svg
+            className="w-4 h-4 absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black/60"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth="2"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+          </svg>
+        </div>
       </div>
+
+
 
       {/* Job Cards */}
       <div className="space-y-4">
@@ -124,8 +142,7 @@ const JobManagement = () => {
               <div className="flex items-center justify-between mt-3 text-sm">
                 <div className="flex items-center gap-6">
                   <div className="font-semibold flex gap-0.5">
-                    <span className='text-[#CAFF45]'>$</span>
-                    <span>{job.price}</span>
+                    <span className='text-[#686382]'>${job.price}</span>
                   </div>
                   <div className='flex justify-center items-center gap-1'>
                     <img src={users} alt="user image" className='w-[15px] h-[15px]' />
@@ -166,7 +183,7 @@ const JobDetailsModal = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-      <div className={`bg-white rounded-xl w-[800px] max-h-[90vh] overflow-y-auto 
+      <div className={`bg-white rounded-xl w-[900px] max-h-[90vh] overflow-y-auto 
       p-6 transform transition-all duration-300 ${show ? "scale-100 opacity-100" : "scale-90 opacity-0"} relative`}
       >
         <button
@@ -193,40 +210,51 @@ const JobDetailsModal = ({ onClose }) => {
 
 
         {/* Job Info */}
-        <div className="grid grid-cols-7 gap-2  pt-6 text-sm">
+        <div className="grid grid-cols-7 gap-6 items-start pt-6 text-sm">
+          {/* Category */}
           <div>
-            <span className="block text-black/70">Category</span>
-            <span className="font-bold ">Tech Corp Inc.</span>
+            <span className="block text-black/70 mb-1">Category</span>
+            <span className="font-semibold text-black">Tech Corp Inc.</span>
           </div>
+
+          {/* Job Type */}
           <div>
-            <span className="block text-black/70">Job Type</span>
-            <span className="inline-block bg-[#A49ACF] text-white
-             px-2 py-0.5 rounded-full text-xs mt-2">
+            <span className="block text-black/70 mb-1">Job Type</span>
+            <span className="inline-block bg-[#A49ACF] text-white px-3 py-1 rounded-full text-xs font-medium">
               Remote
             </span>
           </div>
+
+          {/* Preferred Time */}
           <div>
-            <span className="block text-black/70">Preferred Time</span>
-            <span className="font-bold">Flexible</span>
+            <span className="block text-black/70 mb-1">Preferred Time</span>
+            <span className="font-semibold text-black">Flexible</span>
           </div>
+
+          {/* Status */}
           <div>
-            <span className="block text-black/70">Status</span>
-            <span className="inline-block bg-[#CAFF45] text-[#686382] px-2 py-0.5 
-            rounded-full text-xs mt-2">
+            <span className="block text-black/70 mb-1">Status</span>
+            <span className="inline-block bg-[#CAFF45] text-[#686382] px-3 py-1 rounded-full text-xs font-medium">
               Active
             </span>
           </div>
+
+          {/* Budget */}
           <div>
-            <span className="block text-black/70">Budget</span>
-            <span className="font-bold">$5,000</span>
+            <span className="block text-black/70 mb-1">Budget</span>
+            <span className="font-semibold text-black">$5,000</span>
           </div>
+
+          {/* Posted Date */}
           <div>
-            <span className="block text-black/70">Posted Date</span>
-            <span className="font-bold">2024-01-15</span>
+            <span className="block text-black/70 mb-1">Posted Date</span>
+            <span className="font-semibold text-black">2024-01-15</span>
           </div>
+
+          {/* Deadline */}
           <div>
-            <span className="block text-black/70">Deadline</span>
-            <span className="font-bold">2024-02-15</span>
+            <span className="block text-black/70 mb-1">Deadline</span>
+            <span className="font-semibold text-black">2024-02-15</span>
           </div>
         </div>
 
@@ -304,7 +332,7 @@ const JobDetailsModal = ({ onClose }) => {
                 ))}
               </div>
               {/* Buttons */}
-              <div className="flex gap-3 mt-4">
+              {/* <div className="flex gap-3 mt-4">
                 <button className="bg-[#686382] text-white text-sm px-4 cursor-pointer  
                 rounded-[10px] flex items-center justify-center gap-1">
                   <img src={message} alt="message" className='w-4' />
@@ -320,7 +348,7 @@ const JobDetailsModal = ({ onClose }) => {
                   View Profile
                 </button>
 </Link>
-              </div>
+              </div> */}
             </div>
 
           </div>
