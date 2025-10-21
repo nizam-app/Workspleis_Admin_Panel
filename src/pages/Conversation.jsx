@@ -114,7 +114,7 @@ const Conversation = () => {
             />
             <div><h2 className="font-semibold text-[22px]">Emilly Davis 
               <span className="ml-2 text-xs bg-lime-200 text-lime-800 px-2 py-0.5 rounded-full">
-                Special Project
+                Service Provider
               </span>
             </h2>
             <p className="text-sm">Deep house cleaning service needed</p></div>

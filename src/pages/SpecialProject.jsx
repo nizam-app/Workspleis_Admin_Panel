@@ -4,13 +4,13 @@ import search from '../assets/admin/jobs/search.svg'
 import send from '../assets/admin/special/send.svg'
 import dot from '../assets/admin/special/dot.svg'
 import calender from '../assets/admin/special/calender.svg'
-import user from '../assets/admin/special/user.svg'
 import clock from '../assets/admin/special/clock.svg'
 import cancell from '../assets/admin/special/cancell.svg'
 import completed from '../assets/admin/special/completed.svg'
 import pending from '../assets/admin/special/pending.svg'
 import total from '../assets/admin/special/total.svg'
-import plane from '../assets/admin/special/plane.svg'
+import plane from '../assets/admin/special/plane.svg';
+
 import company from '../assets/admin/special/company.svg'
 
 
@@ -94,31 +94,24 @@ const specialProjects = [
   },
 ];
 
-const statusStyles = {
-  Submitted: "bg-gray-200 text-gray-600",
-  Proposal_Sent: "bg-[#CAFF45] text-[#686382]",
-  In_Progress: "bg-blue-100 text-blue-700",
-  In_Review: "bg-purple-200 text-purple-700",
-  Delivered: "bg-green-200 text-green-700",
-};
 
 
 // Stats
 const stats = [
   { title: "Total Special Projects", value: 150, icon: total },
   { title: "Completed Special Projects", value: 80, icon: completed },
-  { title: "Pending Special Projects", value: 1200, icon: pending },
-  { title: "Cancelled Special Projects ", value: 1000, icon: cancell },
+  { title: "Pending Special Projects", value: 40, icon: pending },
+  { title: "Cancelled Special Projects ", value: 10, icon: cancell },
 ];
 
 const SpecialProject = () => {
   const [trackModel, setTrackModel] = useState(false);
   const [submitOrder, setSubmitOrder] = useState(false);
-  const [viewSubmition, setViewSubmition] = useState(false);
   const [proposalModel, setProposalModel] = useState(false);
   const [inReviewModel, setInReviewModel] = useState(false);
   const [deliveredModel, setDeliveredModel] = useState(false);
   const [viewProjectModel, setViewProjectModel] = useState(false);
+  const [showView, setShowView] = useState(false);
   return (
     <div className="p-6">
       {/* Header */}
@@ -271,46 +264,66 @@ const SpecialProject = () => {
                 </button>
 
 
-                {job.status === 'Submitted' &&
+                <div className="flex gap-3">
+
                   <button
-                    onClick={() => setProposalModel(true)}
-                    className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
-                      text-sm font-semibold cursor-pointer ">
-                    <img src={send} alt="send" />
-                    Send Proposal
+                    onClick={() => {
+                      setSelectedProject(specialProjects); // এখানে job মানে তোমার প্রজেক্ট অবজেক্ট
+                      setTrackModel(true);
+                    }}
+                    className="flex gap-2 items-center text-white bg-[#686382] px-4 py-2 rounded-[10px] 
+      text-sm font-semibold cursor-pointer hover:bg-[#575074] transition"
+                  >
+                    <img src={plane} alt="track" className="w-[16px] h-[16px]" />
+                    Track Project
                   </button>
-                }
-                {job.status === 'Proposal_Sent' &&
-                  <button
-                    onClick={() => setProposalModel(true)}
-                    className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
-                      text-sm font-semibold cursor-pointer ">
-                    <img src={view} alt="view" className='w-[19px] h-[19px]' />
-                  View Project
-                  </button>
-                }
 
-
-
-                {(job.status === 'In_Progress' || job.status === 'In_Review' ||
-                  job.status === 'Delivered'
-                ) &&
-                  <div className='flex gap-3'>
-                    
+                  {job.status === 'Submitted' &&
                     <button
-                      onClick={() => {
-                        job.status === 'In_Progress' && setSubmitOrder(true);
-                        job.status === 'In_Review' && setInReviewModel(true);
-                        job.status === 'Delivered' && setDeliveredModel(true);
-                      }}
+                      onClick={() => setProposalModel(true)}
                       className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
                       text-sm font-semibold cursor-pointer ">
+                      <img src={send} alt="send" />
+                      Send Proposal
+                    </button>
+                  }
+                  {job.status === 'Proposal_Sent' &&
+                    <button
+                      onClick={() => setShowView(true)}
+                      className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
+                      text-sm font-semibold cursor-pointer ">
+                      <img src={view} alt="view" className='w-[19px] h-[19px]' />
+                      View Proposal
+                    </button>
+                  }
+                  {job.status === 'In_Progress' &&
+                    <button
+                      onClick={() => setSubmitOrder(true)}
+                      className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
+                      text-sm font-semibold cursor-pointer ">
+                      <img src={send} alt="send" />
                       Completed Project
                     </button>
-                  </div>
-                }
-
-
+                  }
+                  {job.status === 'In_Review' &&
+                    <button
+                      onClick={() => setInReviewModel(true)}
+                      className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
+                      text-sm font-semibold cursor-pointer ">
+                      <img src={view} alt="view" className='w-[19px] h-[19px]' />
+                      View Completion
+                    </button>
+                  }
+                  {job.status === 'Delivered' &&
+                    <button
+                      onClick={() => setDeliveredModel(true)}
+                      className="flex gap-2 bg-[#CAFF45] text-[#686382] px-4 py-2 rounded-[10px] 
+                      text-sm font-semibold cursor-pointer ">
+                      <img src={send} alt="send" />
+                      Give Feedback
+                    </button>
+                  }
+                </div>
               </div>
             </div>
           </div>
@@ -324,6 +337,8 @@ const SpecialProject = () => {
       {inReviewModel && <InReviewModal onClose={() => setInReviewModel(false)} />}
       {deliveredModel && <DeliveredModal onClose={() => setDeliveredModel(false)} />}
       {viewProjectModel && <ViewProjectModel onClose={() => setViewProjectModel(false)} />}
+      {showView && <ViewProposalModal onClose={() => setShowView(false)} />}
+
 
     </div>
   )
@@ -331,95 +346,170 @@ const SpecialProject = () => {
 
 export default SpecialProject;
 
+// ===============================
+// 📊 TrackingModal Component
+// ===============================
 
-const TrackerModel = ({ onClose }) => {
-  const progress = 45;
-
-  const steps = [
-    { title: "Submitted", description: "Your request has been successfully submitted and recorded in our system.", completed: true },
-    { title: "Proposal Sent", description: "Our team has reviewed your request and a proposal has been prepared and shared with you", completed: true },
-    { title: "In Progress", description: "Work on your project has started, and our team is actively making progress toward completion.", completed: true },
-    { title: "Completed", description: "The project has been successfully delivered and all tasks are finalized.", completed: false },
-    { title: "Delivered", description: "Work on your project has been completed, and our team is actively making progress toward completion.", completed: false },
-  ];
+const TrackerModel = ({ onClose, project }) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    // Trigger animation after mount
-    setTimeout(() => setShow(true), 10);
+    const timeout = setTimeout(() => setShow(true), 10);
+    return () => clearTimeout(timeout);
   }, []);
+
+  // Step mapping for progress tracking
+  const getProgressStep = (status) => {
+    switch (status) {
+      case "Submitted":
+        return 1;
+      case "Proposal_Sent":
+        return 2;
+      case "In_Progress":
+        return 3;
+      case "In_Review":
+        return 4;
+      case "Delivered":
+        return 5;
+      default:
+        return 0;
+    }
+  };
+
+  const currentStep = getProgressStep(project?.status);
+  const steps = [
+    {
+      title: "Submitted",
+      desc: "Your request has been successfully submitted and recorded in our system.",
+    },
+    {
+      title: "Proposal Sent",
+      desc: "Our team has reviewed your request and a proposal has been prepared and shared with you.",
+    },
+    {
+      title: "In Progress",
+      desc: "Work on your project has started, and our team is actively making progress toward completion.",
+    },
+    {
+      title: "Completed",
+      desc: "The project has been successfully delivered and all tasks are finalized.",
+    },
+    {
+      title: "Delivered",
+      desc: "Work on your project has been completed and our team is closing all deliverables.",
+    },
+  ];
+
+  const progressPercentage = (currentStep / steps.length) * 100;
+
   return (
-    <div className='fixed inset-0 flex items-center justify-center bg-black/40 z-50'>
-      <div className={`max-w-md  mx-auto bg-white shadow-lg 
-    rounded-xl p-5 space-y-5
-    transform transition-all duration-300 
-        ${show ? "scale-100 opacity-100" : "scale-90 opacity-0"} relative`}>
+    <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+      <div
+        className={`bg-white rounded-2xl w-full max-w-lg p-6 shadow-lg transform transition-all duration-300 ${show ? "scale-100 opacity-100" : "scale-90 opacity-0"
+          } relative`}
+      >
+        {/* Close Button */}
         <button
           onClick={onClose}
-          className="text-black bg-black/20 text-[20px] px-3 py-1.5 rounded-[50px]
-            absolute right-5 top-5 cursor-pointer"
+          className="absolute right-5 top-5 text-black bg-black/20 text-[20px] px-3 py-1.5 rounded-full hover:bg-black/30"
         >
           ✕
         </button>
 
-
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="bg-[#CAFF45] p-2 rounded-[9px]">
-              <img src={plane} alt="plane" />
-            </div>
-            <div>
-              <h2 className="text-lg font-bold">Special Project</h2>
-              <p className="text-sm text-[#C2C2C2]">Title :</p>
-            </div>
+        <div className="flex items-center gap-3 mb-4">
+          <div className="bg-[#686382] p-2 rounded-md">
+            <img src={project?.icon || plane} alt="icon" className="w-6 h-6" />
           </div>
-
+          <div>
+            <h2 className="text-lg font-bold">Special Project</h2>
+            <p className="text-sm text-black/60">
+              Title: {project?.title || "N/A"}
+            </p>
+          </div>
+          <span className="ml-auto text-xs bg-[#E9E7FF] text-[#685CC8] px-3 py-1 rounded-full">
+            {project?.status || "Under Review"}
+          </span>
         </div>
 
-        {/* Progress */}
-        <div>
-          <p className="text-sm  mb-1">Progress</p>
+        {/* Progress Bar */}
+        <div className="mb-5">
+          <div className="flex justify-between mb-1 text-sm font-medium">
+            <span>Progress</span>
+            <span>{Math.round(progressPercentage)}%</span>
+          </div>
           <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div
-              className="bg-[#CAFF45] h-2.5 rounded-full"
-              style={{ width: `${progress}%` }}
+              className="bg-[#CAFF45] h-2.5 rounded-full transition-all duration-300"
+              style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
-          <p className="text-sm text-right text-gray-600 mt-1">{progress}%</p>
         </div>
 
-        <div className='border border-[#CAFF45] rounded-[10px]'>
-          {/* Timeline */}
-          <div className="p-4.5">
-            <h3 className="text-sm font-bold mb-4 ">Project Timeline</h3>
-            <div className="space-y-4">
-              {steps.map((step, index) => (
-                <div key={index} className="flex items-start space-x-3">
-                  {step.completed ? (
-                    <div className="mt-1 bg-[#CAFF45] text-white p-2 rounded-[100px]">
-                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </div>
-                  ) : (
-                    <div className="mt-1 p-1.5 text-gray-300 rounded-full border-2 border-gray-300">
-                      <div className="w-5 h-5 "></div>
-                    </div>
+        {/* Timeline Steps */}
+        <div className="space-y-3">
+          {steps.map((step, index) => {
+            const isCompleted = index < currentStep;
+            return (
+              <div
+                key={index}
+                className={`flex items-start gap-3 p-3 rounded-md border transition-all duration-200 ${isCompleted
+                    ? "border-[#CAFF45] bg-[#F7FFD8]"
+                    : "border-gray-200 bg-gray-50"
+                  }`}
+              >
+                <div
+                  className={`flex items-center justify-center w-5 h-5 rounded-full mt-1 ${isCompleted ? "bg-[#CAFF45]" : "bg-gray-300"
+                    }`}
+                >
+                  {isCompleted && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth="3"
+                      stroke="#686382"
+                      className="w-3.5 h-3.5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
                   )}
-                  <div>
-                    <h4 className="text-sm font-medium text-gray-800">{step.title}</h4>
-                    <p className="text-sm text-gray-500">{step.description}</p>
-                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
+                <div>
+                  <h4
+                    className={`font-semibold ${isCompleted ? "text-[#686382]" : "text-gray-400"
+                      }`}
+                  >
+                    {step.title}
+                  </h4>
+                  <p className="text-sm text-gray-500">{step.desc}</p>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Footer */}
+        <div className="flex justify-end mt-6">
+          <button
+            onClick={onClose}
+            className="bg-[#CAFF45] text-[#686382] px-6 py-2 rounded-full text-md font-semibold hover:bg-[#B9F33C] transition-colors"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>
   );
 };
+
+
+
+
 
 
 const SubmitOrderModel = ({ onClose }) => {
@@ -591,7 +681,7 @@ const ProposalModal = ({ onClose }) => {
           <div>
             <label className="block font-bold mb-1">Estimated Cost</label>
             <input
-              type="text"
+              type="number"
               value={cost}
               onChange={(e) => setCost(e.target.value)}
               placeholder="$50,000"
@@ -603,8 +693,8 @@ const ProposalModal = ({ onClose }) => {
             <label className="block font-bold mb-1">Time Line</label>
             <input
               type="text"
-              value={cost}
-              onChange={(e) => setCost(e.target.value)}
+              value={timeline}
+              onChange={(e) => setTimeline(e.target.value)}
               placeholder="10 days"
               className="w-full border border-[#686382]/60 bg-black/6 
               rounded-[5px] px-3 py-2 outline-none"
@@ -675,6 +765,105 @@ const ProposalModal = ({ onClose }) => {
     </div>
   );
 };
+
+// ===============================
+// 📄 ViewProposalModal Component
+// ===============================
+const ViewProposalModal = ({ onClose, proposal }) => {
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => setShow(true), 10);
+  }, []);
+
+  return (
+    <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
+      <div
+        className={`bg-white rounded-2xl w-full max-w-2xl p-6 shadow-lg transform transition-all duration-300 
+          ${show ? "scale-100 opacity-100" : "scale-90 opacity-0"} relative`}
+      >
+        {/* Close Button */}
+        <button
+          onClick={onClose}
+          className="text-black bg-black/20 text-[20px] px-3 py-1.5 rounded-[50px]
+            absolute right-5 top-5 cursor-pointer"
+        >
+          ✕
+        </button>
+
+        {/* Title */}
+        <h2 className="text-[22px] font-bold mb-1">Proposal Details</h2>
+        <p className="text-black/70 mb-5">
+          Review the submitted proposal details below.
+        </p>
+
+        {/* Cost & Timeline */}
+        <div className="grid grid-cols-2 gap-4 mb-5">
+          <div>
+            <label className="block text-black/70 text-sm mb-1">
+              Estimated Cost
+            </label>
+            <div className="font-bold text-lg">{proposal?.cost || "$0"}</div>
+          </div>
+          <div>
+            <label className="block text-black/70 text-sm mb-1">Timeline</label>
+            <div className="font-bold text-lg">{proposal?.timeline || "N/A"}</div>
+          </div>
+        </div>
+
+        {/* Note Section */}
+        <div className="mb-5">
+          <label className="block text-black/70 text-sm mb-1">
+            Note for Client
+          </label>
+          <div className="p-3 border border-[#686382]/60 bg-black/5 rounded-[5px] text-black/80">
+            {proposal?.note || "No note provided."}
+          </div>
+        </div>
+
+        {/* Files */}
+        <div className="mt-6">
+          <label className="block text-black/70 text-sm mb-1">Attachments</label>
+          {proposal?.files && proposal.files.length > 0 ? (
+            <ul className="space-y-2">
+              {proposal.files.map((file, index) => (
+                <li
+                  key={index}
+                  className="flex justify-between items-center bg-[#EAE9E9] px-3 py-2 rounded-[10px]"
+                >
+                  <span className="text-sm text-gray-700">{file.name}</span>
+                  <a
+                    href={file.url || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#686382] font-medium hover:underline"
+                  >
+                    View
+                  </a>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-500 text-sm">No files attached.</p>
+          )}
+        </div>
+
+        {/* Close Button */}
+        <div className="flex justify-end mt-6">
+          <button
+            onClick={onClose}
+            className="bg-[#CAFF45] text-[#686382] px-6 py-2 rounded-full text-md font-semibold cursor-pointer"
+          >
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+
 
 
 const InReviewModal = ({ onClose }) => {
